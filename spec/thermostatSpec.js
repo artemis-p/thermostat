@@ -1,8 +1,23 @@
+'use strict';
+
 describe('Thermostat', function() {
   var thermostat;
 
-  it('starts at 20 degrees', function() {
+  beforeEach(function() {
     thermostat = new Thermostat;
-    expect(thermostat.temperature).toEqual(20);
+  });
+
+  it('starts at 20 degrees', function() {
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
+  });
+
+  it('increases temperature with up function', function() {
+    thermostat.up();
+    expect(thermostat.getCurrentTemperature()).toEqual(21);
+  });
+
+  it('decreases temperature with down function', function() {
+    thermostat.down();
+    expect(thermostat.getCurrentTemperature()).toEqual(19);
   });
 });
