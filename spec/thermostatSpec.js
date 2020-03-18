@@ -58,6 +58,37 @@ describe('Thermostat', function() {
     }
     expect(thermostat.getCurrentTemperature()).toEqual(32);
   });
+  it('can return temperature back to 20', function(){
+    thermostat.up()
+    thermostat.reset()
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
+
+
+  });
+  it('gives us low-energy usage when below < 18 degrees', function(){
+    for(var i=0;i<7;i++){
+      thermostat.down();
+    }
+    expect(thermostat.getCurrentUsage()).toEqual("low-usage")
+
+  });
+
+  it('gives us medium-energy usage when between 18 and 25 degrees', function(){
+    for(var i=0;i<3;i++){
+      thermostat.up();
+    }
+    expect(thermostat.getCurrentUsage()).toEqual("medium-usage")
+
+  });
+
+  it('gives us high-energy usage when over 25', function(){
+    this.powerSavingMode = false
+    for(var i=0;i<7;i++){
+      thermostat.up();
+    }
+    expect(thermostat.getCurrentUsage()).toEqual("high-usage")
+
+  });
 
 });
 
